@@ -31,3 +31,6 @@ class Blog(db.Model):
 @app.route('/', methods=['POST', 'GET'])
 def index():
     return render_template('blog.html', title="Build A Blog")
+
+if __name__== '__main__':
+    app.run()
