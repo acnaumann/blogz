@@ -22,10 +22,29 @@ class Blog(db.Model):
     def __init__(self, title, body):
         self.title = title
         self.body = body
+        self.new_post = True
+
+
+
+
+@app.route("/newpost", methods=['POST', 'GET'])
+def newpost():
+    title = request.form('title')
+    body = request.form('body')
+    new_post = Blog(title=title, body=body)
+    db.session.add(new_post)
+    db.session.commit()
+
+
+    blogs = Blog.query.filter_by(new_post=True).all()
+    posted = Blog.query.filter_by(new_post=True).all()
+    return redirect('/blog', title='Add a Blog Entry', blogs=blogs, posted=posted)
         
 
 
-
+@app.route('/blog', methods=['POST', 'GET'])
+def blog():
+    return render_template('blog.html')
 
 
 @app.route('/', methods=['POST', 'GET'])

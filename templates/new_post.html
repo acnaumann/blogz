@@ -2,16 +2,19 @@
 
 {% block content %}
 
-<form action='/title' method='POST'>
-    <label>
-        Title for your new blog:
-        <input type="text" value="blog-title"/>
-    </label>
-        
-    <label>
-        Your new blog:
-        <input type="text" value="blog-body"/>
-    </label>
-    <input type="submit" value="Add Entry"/>
-        
-</form>
+    <div>
+        <form action='/newpost' method='POST'>
+            <label>
+                Title for your new blog:
+                <input type="text" name="title"/>
+            </label>
+            <br>
+            <label>
+                Your new blog:
+                <input type="text" name="body"/>
+            </label>
+            <input type="submit" value="Add Entry"/>
+        </form>
+    </div>
+
+{% endblock %}

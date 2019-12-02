@@ -14,13 +14,13 @@
         </style>
     </head>
     <body>
-        <h2>
-            <a href="/">Main Blog Page</a>
-        </h2>
-        <h2>
-            <a href="/new-blog">Add a Blog Entry</a>
-        </h2>
-        </span>
+        <div style='display:inline-block'>
+            <form> 
+                <a href="/blog">Main Blog Page</a>
+                <a href="/newpost">Add a Blog Entry</a> 
+            </form>
+        
+        </div>  
 
         {% block content %}
         {% endblock %}
