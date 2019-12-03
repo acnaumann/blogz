@@ -64,8 +64,7 @@ def post():
 @app.route('/blog', methods=['POST', 'GET'])
 def blog():
     if request.method == 'GET':
-        post = Blog.query.all()
-        redirect('/post', post=post)
+        id = Blog.query.get(blog.id)
 
     blogs = Blog.query.all()
     return render_template('blog.html', Title="Build A Blog", blogs=blogs)
