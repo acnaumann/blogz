@@ -29,21 +29,28 @@ class Blog(db.Model):
 
 @app.route("/newpost", methods=['POST', 'GET'])
 def newpost():
-    title = request.form['blog-title']
-    body = request.form['blog-body']
-
-    if title == '':
-        
-        return render_template('new_post.html')
-    
     if request.method == 'POST':
+        title = request.form['blog-title']
+        body = request.form['blog-body']
         
-        post = Blog(title=title, body=body)
-        db.session.add(post)
-        db.session.commit()
 
-        return redirect('/blog')
+        if title == '':
+            title_error = "Please fill in the title"
+        else:
+            title_error=None
 
+        if body == '':
+            body_error = "Please fill in the body"
+        else:
+            body_error=None
+    
+        if not title_error and not body_error:
+            post = Blog(title=title, body=body)
+            db.session.add(post)
+            db.session.commit()
+            return redirect('/blog')
+
+        return render_template('new_post.html', Title='Add a Post', title_error=title_error, body_error=body_error )
     return render_template('new_post.html', Title='Add a Post')
    
 

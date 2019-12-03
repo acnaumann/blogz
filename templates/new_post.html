@@ -6,19 +6,26 @@
         <form action="/newpost" method='post'>
             <label>
                 Title for your new blog:
-                <input type="text" name="blog-title"/>
+                {% if title_error %}
+                <input type="text" name="blog-title" />
+                <span class="error">{{title_error}}</span>
+                {% else %}
+                <input type="text" name="blog-title" value="{{request.form['blog-title']}}"/>
+                {% endif %}
+                
             </label>
             <br>
             <label>
                 Your new blog:
+                {% if body_error %}
                 <input type="text" name="blog-body"/>
+                <span class="error">{{body_error}}</span>
+                {% else %}
+                <input type="text" name="blog-body" value="{{request.form['blog-body']}}"/>
+                {% endif %}
             </label>
             <input type="submit" value="Add Entry"/>
         </form>
     </div>
-
-{% if error %}
-    <p class='error'>{{error}}</p>
-{% endif %}
 
 {% endblock %}
