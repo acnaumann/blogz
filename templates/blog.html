@@ -1,16 +1,10 @@
 {% extends "base.html" %}
 
-{% block content %}
-    <h1>Add a Blog Entry</h1>
-    {% if blogs|length == 0 %}
-        <p> No blog posts yet</p>
-    {% else %}
+{% block content %} 
         {% for blog in blogs %}
-        {{blog.title}}
-        {{blog.body}}
+        <table> 
+            <tr><h2>{{blog.title}}</h2></tr>
+            <td>{{blog.body}}</td>
+        </table>
         {% endfor %}
-    
-    {% endif %}
-
-
 {% endblock %}

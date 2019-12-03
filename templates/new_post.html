@@ -3,18 +3,22 @@
 {% block content %}
 
     <div>
-        <form action='/newpost' method='POST'>
+        <form action="/newpost" method='post'>
             <label>
                 Title for your new blog:
-                <input type="text" name="title"/>
+                <input type="text" name="blog-title"/>
             </label>
             <br>
             <label>
                 Your new blog:
-                <input type="text" name="body"/>
+                <input type="text" name="blog-body"/>
             </label>
             <input type="submit" value="Add Entry"/>
         </form>
     </div>
+
+{% if error %}
+    <p class='error'>{{error}}</p>
+{% endif %}
 
 {% endblock %}
