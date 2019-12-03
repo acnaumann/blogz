@@ -54,10 +54,18 @@ def newpost():
     return render_template('new_post.html', Title='Add a Post')
    
 
+@app.route('/post', methods=['GET'])
+def post():
+
+    
+    return render_template ('post.html')
+
 
 @app.route('/blog', methods=['POST', 'GET'])
 def blog():
-
+    if request.method == 'GET':
+        post = Blog.query.all()
+        redirect('/post', post=post)
 
     blogs = Blog.query.all()
     return render_template('blog.html', Title="Build A Blog", blogs=blogs)

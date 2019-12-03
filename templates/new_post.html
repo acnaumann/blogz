@@ -1,29 +1,42 @@
 {% extends "base.html" %}
 
 {% block content %}
-
+    
     <div>
+        <br>
         <form action="/newpost" method='post'>
             <label>
                 Title for your new blog:
+                <br>
                 {% if title_error %}
                 <input type="text" name="blog-title" />
+                <br>
+                
                 <span class="error">{{title_error}}</span>
+                
                 {% else %}
                 <input type="text" name="blog-title" value="{{request.form['blog-title']}}"/>
                 {% endif %}
-                
+                <br>
             </label>
             <br>
             <label>
                 Your new blog:
+                <br>
                 {% if body_error %}
-                <input type="text" name="blog-body"/>
+                
+                
+                <textarea name="blog-body"></textarea>
+                <br>
                 <span class="error">{{body_error}}</span>
+                <br>
+                
                 {% else %}
-                <input type="text" name="blog-body" value="{{request.form['blog-body']}}"/>
+                
+                <textarea name="blog-body" value="{{request.form['blog-body']}}"></textarea>
                 {% endif %}
             </label>
+            <br>
             <input type="submit" value="Add Entry"/>
         </form>
     </div>
