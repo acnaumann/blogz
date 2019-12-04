@@ -63,11 +63,15 @@ def post():
 
 @app.route('/blog', methods=['POST', 'GET'])
 def blog():
-    if request.method == 'GET':
-        id = Blog.query.get(blog.id)
-
     blogs = Blog.query.all()
-    return render_template('blog.html', Title="Build A Blog", blogs=blogs)
+    if request.method == 'GET':
+        ids = Blog.query.filter_by('title').all()
+        for id in ids:
+            return redirect('/blog?id' + id)
+    
+    
+    
+    return render_template('blog.html', Title="Build A Blog", blogs=blogs, id=id)
 
 
 @app.route('/', methods=['POST', 'GET'])
