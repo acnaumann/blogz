@@ -65,9 +65,9 @@ def post():
 def blog():
     blogs = Blog.query.all()
     if request.method == 'GET':
-        ids = Blog.query.filter_by('title').all()
+        id = Blog.query.filter_by('title').all()
         for id in ids:
-            return redirect('/blog?id' + id)
+            return redirect('/blog?id={0}'.format(id))
     
     
     
