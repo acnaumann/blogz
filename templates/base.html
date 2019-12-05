@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title style='text-align: center'>
-            {{title}}
+        <title >
+            
         </title>
         <style>
         textarea {
@@ -22,13 +22,18 @@
     </head>
     <body>
         <div style='display:inline-block'>
-            <form> 
-                <a href="/blog">Main Blog Page</a> 
-                <a href="/newpost">Add a Blog Entry</a> 
-            </form>
-        
+                <form> 
+                    <a href="/blog">Main Blog Page</a> 
+                    <a href="/newpost">Add a Blog Entry</a> 
+                </form>
+            
         </div>  
-
+        
+        <h1 style='text-align: center'>{{title}}</h1>
+        <div>
+            <p>{{body}}</p>
+        </div>
+      
         {% block content %}
         {% endblock %}
 

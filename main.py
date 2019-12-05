@@ -50,8 +50,8 @@ def newpost():
             db.session.commit()
             return redirect('/blog')
 
-        return render_template('new_post.html', Title='Add a Post', title_error=title_error, body_error=body_error )
-    return render_template('new_post.html', Title='Add a Post')
+        return render_template('new_post.html', title='Add a Post', title_error=title_error, body_error=body_error )
+    return render_template('new_post.html', title='Add a Post')
    
 
 @app.route('/post', methods=['GET'])
@@ -63,21 +63,20 @@ def post():
 
 @app.route('/blog', methods=['POST', 'GET'])
 def blog():
-    blogs = Blog.query.all()
-    if request.method == 'GET':
-        id = Blog.query.filter_by('title').all()
-        for id in ids:
-            return redirect('/blog?id={0}'.format(id))
-    
-    
-    
-    return render_template('blog.html', Title="Build A Blog", blogs=blogs, id=id)
+
+    id = request.args.get('id')
+  
+    if id == None:
+        blogs = Blog.query.all()
+        return render_template('blog.html', title="Build A Blog", blogs=blogs)
+    else:
+        blog = Blog.query.filter_by(id=id).first()
+        return render_template('blog.html', title=blog.title, body=blog.body)
+    #return redirect('/blog?id=id', id=id)
 
 
 @app.route('/', methods=['POST', 'GET'])
 def index():
-
-    
 
     return redirect('/blog')
 
