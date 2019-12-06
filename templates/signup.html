@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2>Register</h2>
+
+<form action="/signup" method="post">
+    <p>
+        <label>username:
+            <input type="text" name="username" {% if not name_error %} value="{{request.form['username']}}" {% endif%}/>
+            {% if name_error %}
+            <span class="error">{{name_error}}</span>
+            {% endif %}
+        </label>
+    </p>
+    <p>
+        <label>password:
+            <input type="password" name="password"/>
+            {% if pass_error %}
+            <span class="error">{{pass_error}}</span>
+            {% endif %}
+        </label>
+    </p>
+    <p>
+        <label>verify password:
+            <input type="password" name="verify"/>
+            {% if verify_error %}
+            <span class="error">{{verify_error}}</span>
+            {% endif %}
+        </label>
+    </p>
+    <p>
+        <input type="submit" value="Register!"/>
+    </p>
+</form>
+
+{% endblock %}
