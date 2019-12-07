@@ -22,12 +22,27 @@
     </head>
     <body>
         <div style='display:inline-block'>
-                <form> 
-                    <a href="/blog">Main Blog Page</a> 
-                    <a href="/newpost">Add a Blog Entry</a> 
-                </form>
-            
-        </div>  
+            <form> 
+                <a href="/blog">Main Blog Page</a> |
+                <a href="/newpost">Add a Blog Entry</a> |
+                <a href="/">Home</a>|
+                {% if 'username' not in session %}
+                <a href="login">Log In</a>
+                {% endif %}
+            </form>
+        </div>    
+        <div style='float: right'>
+        {% if 'username' in session %}
+        {{ session['username'] }}
+            <form action="/logout" method="post">
+                <input type="submit" value="Log Out"/>
+            </form>
+        </div>
+        {% endif %}
+
+
+
+         
         {% with messages = get_flashed_messages() %}
             {% if messages %}
             <ul class=flashes>
@@ -37,20 +52,14 @@
             </ul>
             {% endif %}
         {% endwith %}
-            
-        <div style='float: right'>
-            {% if 'username' in session %}
-             {{ session['username'] }}
-             <form action="/logout" method="post">
-                <input type="submit" value="Log Out"/>
-            </form>
-            {% endif %}
+     
         </div>
         
         <h1 style='text-align: center'>{{title}}</h1>
         <div>
             <p>{{body}}</p>
         </div>
+        
       
         {% block content %}
         {% endblock %}

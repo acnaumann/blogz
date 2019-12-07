@@ -124,7 +124,7 @@ def newpost():
             post = Blog(title=title, body=body, owner=owner)
             db.session.add(post)
             db.session.commit()
-            return redirect('/blog')
+            return redirect('/blog?id=' + str(post.id))
 
         return render_template('newpost.html', title='Add a Post', title_error=title_error, body_error=body_error )
     return render_template('newpost.html', title='Add a Post')
@@ -133,7 +133,7 @@ def newpost():
 @app.route('/logout', methods=['POST'])
 def logout():
     del session['username']
-    return redirect('/login')
+    return redirect('/blog')
 
 @app.route('/post', methods=['GET'])
 def post():
@@ -146,21 +146,29 @@ def post():
 def blog():
     encoded_error = request.args.get("error")
 
-    id = request.args.get('id')
+    id = request.args.get('userId')
   
     if id == None:
         blogs = Blog.query.all()
+
         return render_template('blog.html', title="Build A Blog", blogs=blogs, error=encoded_error and escape(encoded_error))
     else:
         blog = Blog.query.filter_by(id=id).first()
         return render_template('blog.html', title=blog.title, body=blog.body, error=encoded_error and escape(encoded_error))
-    #return redirect('/blog?id=id', id=id)
+        
 
 
 @app.route('/', methods=['POST', 'GET'])
 def index():
-    
-    return redirect('/login')
+    id = request.args.get('id')
+
+    if id == None:
+        users = User.query.all()
+        return render_template('index.html', users=users, title="Home")
+    else:
+        user = User.query.filter_by(id=id).first()
+        # return render_template('index.html', title=user.username)
+        return redirect('/?id=' + str(user.userId))
 
 if __name__== '__main__':
     app.run()

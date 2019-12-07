@@ -2,14 +2,17 @@
 
 {% block content %} 
     
-        {% for blog in blogs %}
-        <table> 
-            <tr>
-                <td><h2><a href="/blog?id={{blog.id}}">{{blog.title}}</a></h2></td>
-            </tr>   
-            <tr>
-                <td>{{blog.body}}</td>
-            </tr> 
-        </table>
-        {% endfor %}
+{% for blog in blogs %}
+<table> 
+    <tr>
+        <td><h2><a href="/blog?id={{blog.id}}">{{blog.title}}</a></h2></td>
+    </tr>   
+    <tr>
+        <td>{{blog.body}}</td>
+    </tr> 
+    <tr>
+        <td>{{owner}}</td>
+    </tr>
+</table>
+{% endfor %}
 {% endblock %}
