@@ -18,27 +18,32 @@
             font-style: italic;
             color: red;
         }
+        body, .navigation { padding-left: 1em;}
         </style>
     </head>
     <body>
-        <div style='display:inline-block'>
-            <form> 
-                <a href="/blog">Main Blog Page</a> |
-                <a href="/newpost">Add a Blog Entry</a> |
-                <a href="/">Home</a>|
-                {% if 'username' not in session %}
-                <a href="login">Log In</a>
-                {% endif %}
+        <nav >
+            <form style='display:inline-block'> 
+                <a href="/" class="navigation">Home</a>
+                <a href="/blog" class="navigation">All Posts</a>
+                <a href="/newpost" class="navigation">New Post</a> 
+                
+                
             </form>
-        </div>    
-        <div style='float: right'>
-        {% if 'username' in session %}
-        {{ session['username'] }}
-            <form action="/logout" method="post">
-                <input type="submit" value="Log Out"/>
-            </form>
-        </div>
-        {% endif %}
+            <div style='float: right'>
+                {% if 'username' in session %}
+                {{ session['username'] }}
+                    <form action="/logout" method="post">
+                        <input type="submit" value="Log Out"/>
+                    </form>
+                {% else %}
+                <form>
+                    <a href="login">Log In</a> 
+                </form>
+                {% endif %} 
+            </div>
+        </nav>    
+        
 
 
 
@@ -56,9 +61,8 @@
         </div>
         
         <h1 style='text-align: center'>{{title}}</h1>
-        <div>
-            <p>{{body}}</p>
-        </div>
+
+      
         
       
         {% block content %}

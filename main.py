@@ -109,7 +109,6 @@ def newpost():
         title = request.form['blog-title']
         body = request.form['blog-body']
         
-
         if title == '':
             title_error = "Please fill in the title"
         else:
@@ -146,29 +145,38 @@ def post():
 def blog():
     encoded_error = request.args.get("error")
 
-    id = request.args.get('userId')
   
-    if id == None:
+    id = request.args.get('id')
+    userId = request.args.get('userId')
+  
+    if id == None and userId == None:
         blogs = Blog.query.all()
+        return render_template('blog.html', title="Blog Posts!", blogs=blogs)
 
-        return render_template('blog.html', title="Build A Blog", blogs=blogs, error=encoded_error and escape(encoded_error))
+    elif userId != None:
+        blogs = Blog.query.filter_by(owner_id=userId)
+        return render_template('user.html', title="Blog Posts!", blogs=blogs)
+    
     else:
         blog = Blog.query.filter_by(id=id).first()
-        return render_template('blog.html', title=blog.title, body=blog.body, error=encoded_error and escape(encoded_error))
-        
+        return render_template('blog.html', title=blog.title, blog=blog)
+
 
 
 @app.route('/', methods=['POST', 'GET'])
 def index():
-    id = request.args.get('id')
+    
+    userId = request.args.get('userId')
+    
 
-    if id == None:
+    if userId == None:
         users = User.query.all()
-        return render_template('index.html', users=users, title="Home")
+        return render_template('index.html', users=users, title="Blog Users")
     else:
-        user = User.query.filter_by(id=id).first()
-        # return render_template('index.html', title=user.username)
-        return redirect('/?id=' + str(user.userId))
+        blogs = Blog.query.filter_by(owner_id=userId)
+        return redirect('/blog')
+    
+    
 
 if __name__== '__main__':
     app.run()
