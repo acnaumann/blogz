@@ -155,7 +155,7 @@ def blog():
 
     elif userId != None:
         blogs = Blog.query.filter_by(owner_id=userId)
-        return render_template('user.html', title="Blog Posts!", blogs=blogs)
+        return render_template('blog.html', title="Blog Posts!", blogs=blogs)
     
     else:
         blog = Blog.query.filter_by(id=id).first()
@@ -174,7 +174,7 @@ def index():
         return render_template('index.html', users=users, title="Blog Users")
     else:
         blogs = Blog.query.filter_by(owner_id=userId)
-        return redirect('/blog')
+        return render_template('blog.html', title="Blog Posts!", blogs=blogs)
     
     
 
