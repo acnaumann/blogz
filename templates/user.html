@@ -4,18 +4,17 @@
 
 
 {% for blog in blogs %}
-
 <table> 
     <tr>
-        <td><h2><a href="/blog?id={{blog.owner_id}}">{{blog.title}}</a></h2></td>
+        <td><h2><a href="/blog?id={{blog.id}}">{{blog.title}}</a></h2></td>
     </tr>   
     <tr>
         <td>{{blog.body}}</td>
     </tr> 
-     <tr>
-        <td>written by <a href="/blog?userId={{blog.owner_id}}">{{blog.owner.username}}</a></td>
+    <tr>
+        <td>written by <a href="/blog?user={{blog.owner_id}}">{{blog.owner.username}}</a></td>
     </tr>
-    
+
 </table>
 {% endfor %}
 

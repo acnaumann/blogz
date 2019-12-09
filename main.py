@@ -155,7 +155,7 @@ def blog():
 
     elif userId != None:
         blogs = Blog.query.filter_by(owner_id=userId)
-        return render_template('blog.html', title="Blog Posts!", blogs=blogs, error=encoded_error and escape(encoded_error))
+        return render_template('user.html', title="Blog Posts!", blogs=blogs, error=encoded_error and escape(encoded_error))
     
     else:
         blog = Blog.query.filter_by(id=id).first()
