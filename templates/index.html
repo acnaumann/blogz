@@ -5,8 +5,7 @@
     {% for user in users %}
     <table> 
         <tr>
-            <td><h2><a href="/blog?user={{user.owner.id}}">{{user.username}}</a></h2></td>
-            <!-- <td><h2><a href="/blog?user={{blogs.owner_id}}">{{user.username}}</a></h2></td> -->
+            <td><h2><a href="/blog?userId={{user.id}}">{{user.username}}</a></h2></td>
         </tr>   
     </table>
     {% endfor %}

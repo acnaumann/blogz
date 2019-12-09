@@ -151,15 +151,15 @@ def blog():
   
     if id == None and userId == None:
         blogs = Blog.query.all()
-        return render_template('blog.html', title="Blog Posts!", blogs=blogs)
+        return render_template('blog.html', title="Blog Posts!", blogs=blogs, error=encoded_error and escape(encoded_error))
 
     elif userId != None:
         blogs = Blog.query.filter_by(owner_id=userId)
-        return render_template('blog.html', title="Blog Posts!", blogs=blogs)
+        return render_template('blog.html', title="Blog Posts!", blogs=blogs, error=encoded_error and escape(encoded_error))
     
     else:
         blog = Blog.query.filter_by(id=id).first()
-        return render_template('blog.html', title=blog.title, blog=blog)
+        return render_template('blog.html', title=blog.title, blog=blog, error=encoded_error and escape(encoded_error))
 
 
 
@@ -174,7 +174,7 @@ def index():
         return render_template('index.html', users=users, title="Blog Users")
     else:
         blogs = Blog.query.filter_by(owner_id=userId)
-        return render_template('blog.html', title="Blog Posts!", blogs=blogs)
+        return redirect('/blog', title="Blog Posts!", blogs=blogs)
     
     
 
